@@ -1,0 +1,21 @@
+section#ergebnis {
+    display: none;
+    padding: 2rem;
+    background-color: rgba(76, 175, 80, 0.3); /* 30% grün */
+    min-height: 100vh; /* volle Höhe */
+}
+
+section#ergebnis.active {
+    display: block;
+}
+
+.ergebnis-main {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ergebnis-main p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}

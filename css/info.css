@@ -1,0 +1,119 @@
+section#info {
+    display: none;
+    padding: 2rem;
+    position: relative;
+    background-color: rgba(76, 175, 80, 0.3); /* 30% grün */
+    min-height: 90vh; /* volle Höhe */
+}
+
+section#info.active {
+    display: block;
+}
+
+/* Logo oben links */
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+}
+
+/* Symbol-Container mittig */
+.symbol-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 100px;
+    position: relative;
+   
+}
+
+.symbol-card {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+
+.symbol-card img {
+    width: 80px;
+    height: 80px;
+    transition: transform 0.3s;
+}
+
+.symbol-card:hover img {
+    transform: scale(1.2);
+}
+
+.hover-text {
+    position: absolute;
+    bottom: -40px;
+    width: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    font-size: 0.9rem;
+}
+
+.symbol-card:hover .hover-text {
+    opacity: 1;
+}
+
+/* Choose your plant unten rechts */
+.choose-plant {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+   
+}
+
+/* Pfeil-Button */
+.arrow-btn {
+    background-color: #6fbf73;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+}
+
+.arrow-btn:hover {
+    background-color: #58a25b;
+}
+
+/* Responsiv */
+@media (max-width: 768px) {
+    .symbol-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 150px;
+    }
+
+    .hover-text {
+        bottom: -35px;
+        width: 120px;
+        font-size: 0.8rem;
+    }
+
+    .logo {
+        width: 80px;
+    }
+
+    .choose-plant {
+        bottom: 15px;
+        right: 15px;
+    }
+}

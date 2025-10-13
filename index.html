@@ -1,110 +1,88 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Gießempfehlung Bern 🌱</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    .cards { display: flex; gap: 1rem; margin-top: 1rem; }
-    .card { flex: 1; background: #f5f5f5; border-radius: 1rem; padding: 1rem; text-align: center; }
-    h1 { margin-bottom: .5rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berner Sonne</title>
+<link rel="stylesheet" href="css/landing.css">
+<link rel="stylesheet" href="css/info.css">
+<link rel="stylesheet" href="css/eingabe.css">
+<link rel="stylesheet" href="css/ergebnis.css">
 </head>
 <body>
-  <h1>Wie viel Wasser braucht deine Pflanze in Bern? 🌿</h1>
 
-  <label for="days">Zeitraum wählen: </label>
-  <select id="days">
-    <option value="5">Letzte 5 Tage</option>
-    <option value="10">Letzte 10 Tage</option>
-    <option value="14">Letzte 14 Tage</option>
-    <option value="custom">Eigener Wert…</option>
-  </select>
-  <input type="number" id="customDays" placeholder="z. B. 30" style="width:80px; display:none;" min="1">
+<!-- ---------------- Landing Page ---------------- -->
+<section id="landing" class="active">
+  <header class="landing-header">
+    <h1>Berner Sonne</h1>
+    <p>Finde heraus, wie viel Wasser deine Pflanzen brauchen!</p>
+    <button class="btn" onclick="showSection('info')">Los geht's</button>
+  </header>
+</section>
 
-  <p id="date"></p>
+<!-- ---------------- Info-Seite ---------------- -->
+<section id="info">
+  <header class="info-header">
+    <img src="images/logo.png" alt="Logo" class="logo">
+  </header>
+  <main class="info-main">
+    <div class="symbol-container">
+      <div class="symbol-card">
+        <img src="images/sun.png" alt="Sonne Icon">
+        <p class="hover-text">Platzhaltertext für Sonne</p>
+      </div>
+      <div class="symbol-card">
+        <img src="images/plant.png" alt="Pflanze Icon">
+        <p class="hover-text">Platzhaltertext für Pflanze</p>
+      </div>
+      <div class="symbol-card">
+        <img src="images/drop.png" alt="Regen Icon">
+        <p class="hover-text">Platzhaltertext für Regentropfen</p>
+      </div>
+    </div>
+    <div class="choose-plant">
+      <span>choose your plant</span>
+      <button class="arrow-btn" onclick="showSection('eingabe')">&#8594;</button>
+    </div>
+  </main>
+</section>
 
-  <div class="cards">
-    <div class="card"><h3>Kleiner Topf</h3><p id="small">–</p></div>
-    <div class="card"><h3>Mittlerer Topf</h3><p id="medium">–</p></div>
-    <div class="card"><h3>Großer Topf</h3><p id="large">–</p></div>
-  </div>
+<!-- ---------------- Eingabe-Seite ---------------- -->
+<section id="eingabe">
+  <header class="eingabe-header">
+    <h1>Pflanzenpflege berechnen</h1>
+  </header>
+  <main class="eingabe-main">
+    <form id="pflegeForm" onsubmit="calculateWater(event)">
+      <label for="topf">Topfgröße auswählen:</label>
+      <select id="topf" name="topf">
+        <option value="small">Klein</option>
+        <option value="medium">Mittel</option>
+        <option value="large">Groß</option>
+      </select>
 
-  <canvas id="chart" height="120"></canvas>
+      <label for="zeitraum">Zeitraum auswählen:</label>
+      <input type="number" id="zeitraum" name="zeitraum" min="1" max="30" value="7"> Tage
 
- <script>
-  const daysSelect = document.getElementById('days');
-  const customInput = document.getElementById('customDays');
-  let chart;
+      <button type="submit" class="btn">Berechnen</button>
+    </form>
+  </main>
+</section>
 
-  async function loadData(days = 5) {
-    const response = await fetch(`api.php?days=${days}`);
-    const data = await response.json();
+<!-- ---------------- Ergebnis-Seite ---------------- -->
+<section id="ergebnis">
+  <header class="ergebnis-header">
+    <h1>Dein Pflanzenbewässerungsergebnis</h1>
+  </header>
+  <main class="ergebnis-main">
+    <p id="ergebnisText">
+      In den letzten Tagen war der UV-Index X und die Temperatur Y°C.  
+      Deshalb solltest du deine Pflanze Z ml Wasser geben.
+    </p>
+    <button class="btn" onclick="showSection('landing')">Noch mal</button>
+  </main>
+</section>
 
-    // Keine Daten? -> Hinweis ausgeben
-    if (!data || !data.length) {
-      document.getElementById('date').textContent = "Keine Daten verfügbar 😕";
-      document.getElementById('small').textContent = "–";
-      document.getElementById('medium').textContent = "–";
-      document.getElementById('large').textContent = "–";
-      if (chart) chart.destroy();
-      return;
-    }
-
-    // Neueste Werte (erster Datensatz)
-    const latest = data[0];
-
-    // Felder befüllen
-    document.getElementById('date').textContent =
-      `Stand: ${new Date(latest.timestamp).toLocaleString('de-CH')}`;
-    document.getElementById('small').textContent  = `${latest.recommendation_small} ml`;
-    document.getElementById('medium').textContent = `${latest.recommendation_medium} ml`;
-    document.getElementById('large').textContent  = `${latest.recommendation_large} ml`;
-
-    // Verlauf für Chart
-    const labels = data.map(d => d.timestamp).reverse();
-    const small  = data.map(d => d.recommendation_small).reverse();
-    const medium = data.map(d => d.recommendation_medium).reverse();
-    const large  = data.map(d => d.recommendation_large).reverse();
-
-    if (chart) chart.destroy();
-    chart = new Chart(document.getElementById('chart'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          { label: 'Kleiner Topf (ml)', data: small, borderColor: '#4caf50', borderWidth: 2, tension: .3 },
-          { label: 'Mittlerer Topf (ml)', data: medium, borderColor: '#2196f3', borderWidth: 2, tension: .3 },
-          { label: 'Großer Topf (ml)', data: large, borderColor: '#ff9800', borderWidth: 2, tension: .3 }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true } }
-      }
-    });
-  }
-
-  // Initial laden
-  loadData();
-
-  // Dropdown-Logik
-  daysSelect.addEventListener('change', () => {
-    if (daysSelect.value === 'custom') {
-      customInput.style.display = 'inline-block';
-      customInput.focus();
-    } else {
-      customInput.style.display = 'none';
-      loadData(daysSelect.value);
-    }
-  });
-
-  // Freier Wert
-  customInput.addEventListener('change', () => {
-    const v = parseInt(customInput.value);
-    if (v > 0) loadData(v);
-  });
-</script>
+<script src="js/script.js"></script>
 </body>
 </html>
