@@ -1,12 +1,12 @@
 <?php
 
-require_once 'config.php'; // Bindet die Datenbankkonfiguration ein
+require_once(__DIR__ . '/config.php');
 
 try {
     // Erstellt eine neue PDO-Instanz mit der Konfiguration aus config.php
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    $sql = "SELECT * FROM `test`";
+    $sql = "SELECT * FROM `im3_datenbank`";
 
     $stmt = $pdo->prepare($sql);
 
