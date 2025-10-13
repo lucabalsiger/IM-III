@@ -1,12 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Test</title>
-  </head>
-  <body>
-    <h1>hello</h1>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Gießempfehlung Bern 🌱</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .cards { display: flex; gap: 1rem; margin-top: 1rem; }
+    .card { flex: 1; background: #f5f5f5; border-radius: 1rem; padding: 1rem; text-align: center; }
+    h1 { margin-bottom: .5rem; }
+  </style>
+</head>
+<body>
+  <h1>Wie viel Wasser braucht deine Pflanze in Bern? 🌿</h1>
+
+  <label for="days">Zeitraum wählen: </label>
+  <select id="days">
+    <option value="5">Letzte 5 Tage</option>
+    <option value="10">Letzte 10 Tage</option>
+    <option value="14">Letzte 14 Tage</option>
+    <option value="custom">Eigener Wert…</option>
+  </select>
+  <input type="number" id="customDays" placeholder="z. B. 30" style="width:80px; display:none;" min="1">
+
+  <p id="date"></p>
+
+  <div class="cards">
+    <div class="card"><h3>Kleiner Topf</h3><p id="small">–</p></div>
+    <div class="card"><h3>Mittlerer Topf</h3><p id="medium">–</p></div>
+    <div class="card"><h3>Großer Topf</h3><p id="large">–</p></div>
+  </div>
+
+  <canvas id="chart" height="120"></canvas>
+
+ <script>
+  const daysSelect = document.getElementById('days');
+  const customInput = document.getElementById('customDays');
+  let chart;
+
+  async function loadData(days = 5) {
+    const response = await fetch(`api.php?days=${days}`);
+    const data = await response.json();
+
+    // Keine Daten? -> Hinweis ausgeben
+    if (!data || !data.length) {
+      document.getElementById('date').textContent = "Keine Daten verfügbar 😕";
+      document.getElementById('small').textContent = "–";
+      document.getElementById('medium').textContent = "–";
+      document.getElementById('large').textContent = "–";
+      if (chart) chart.destroy();
+      return;
+    }
+
+    // Neueste Werte (erster Datensatz)
+    const latest = data[0];
+
+    // Felder befüllen
+    document.getElementById('date').textContent =
+      `Stand: ${new Date(latest.timestamp).toLocaleString('de-CH')}`;
+    document.getElementById('small').textContent  = `${latest.recommendation_small} ml`;
+    document.getElementById('medium').textContent = `${latest.recommendation_medium} ml`;
+    document.getElementById('large').textContent  = `${latest.recommendation_large} ml`;
+
+    // Verlauf für Chart
+    const labels = data.map(d => d.timestamp).reverse();
+    const small  = data.map(d => d.recommendation_small).reverse();
+    const medium = data.map(d => d.recommendation_medium).reverse();
+    const large  = data.map(d => d.recommendation_large).reverse();
+
+    if (chart) chart.destroy();
+    chart = new Chart(document.getElementById('chart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Kleiner Topf (ml)', data: small, borderColor: '#4caf50', borderWidth: 2, tension: .3 },
+          { label: 'Mittlerer Topf (ml)', data: medium, borderColor: '#2196f3', borderWidth: 2, tension: .3 },
+          { label: 'Großer Topf (ml)', data: large, borderColor: '#ff9800', borderWidth: 2, tension: .3 }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  }
+
+  // Initial laden
+  loadData();
+
+  // Dropdown-Logik
+  daysSelect.addEventListener('change', () => {
+    if (daysSelect.value === 'custom') {
+      customInput.style.display = 'inline-block';
+      customInput.focus();
+    } else {
+      customInput.style.display = 'none';
+      loadData(daysSelect.value);
+    }
+  });
+
+  // Freier Wert
+  customInput.addEventListener('change', () => {
+    const v = parseInt(customInput.value);
+    if (v > 0) loadData(v);
+  });
+</script>
+</body>
 </html>
