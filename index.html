@@ -4,54 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Berner Sonne</title>
-<link rel="stylesheet" href="css/landing.css">
-<link rel="stylesheet" href="css/info.css">
-<link rel="stylesheet" href="css/eingabe.css">
-<link rel="stylesheet" href="css/ergebnis.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="./css/landing.css">
+<link rel="stylesheet" href="./css/info.css">
+<link rel="stylesheet" href="./css/eingabe.css">
+<link rel="stylesheet" href="./css/ergebnis.css">
 </head>
 <body>
 
-<!-- ---------------- Landing Page ---------------- -->
-<section id="landing" class="active">
-  <header class="landing-header">
+  <!-- ---------------- Landing Page ---------------- -->
+  <section id="landing" class="active">
     <h1>Berner Sonne</h1>
-
-    <!-- Logo zentriert und groß -->
-    <div class="landing-logo-container">
-      <img src="img/logo.png" alt="Logo Berner Sonne" class="landing-logo">
-    </div>
-
+    <img src="img/logo.png" alt="Logo Berner Sonne" class="landing-logo">
     <p>Finde heraus, wie viel Wasser deine Pflanzen brauchen!</p>
     <button class="btn" onclick="showSection('info')">Los geht's</button>
-  </header>
-</section>
+  </section>
 
-<!-- ---------------- Info-Seite ---------------- -->
-<section id="info">
-  <header class="info-header">
+  <!-- ---------------- Info-Seite ---------------- -->
+  <section id="info">
     <img src="img/logo.png" alt="Logo" class="logo">
-  </header>
-  <main class="info-main">
     <div class="symbol-container">
       <div class="symbol-card">
         <img src="img/sun.png" alt="Sonne Icon">
-        <p class="hover-text">Platzhaltertext für Sonne</p>
+        <p class="hover-text">
+          <strong>UV-Index:</strong> Der UV-Index zeigt an, wie stark die ultraviolette Strahlung der Sonne auf der Erde ankommt. Je höher der Wert, desto intensiver die Strahlung und desto mehr Wasser benötigen die Pflanzen.
+        </p>
       </div>
       <div class="symbol-card">
         <img src="img/plant.png" alt="Pflanze Icon">
-        <p class="hover-text">Platzhaltertext für Pflanze</p>
+        <p class="hover-text">
+          <strong>Pflanzenpflege:</strong> Ob drinnen oder draußen, jede Pflanze hat andere Bedürfnisse. Auch die Topfgröße beeinflusst Wachstum und Gesundheit – grössere Töpfe bieten mehr Wurzelraum und Stabilität.
+        </p>
       </div>
       <div class="symbol-card">
-        <img src="img/drop.png" alt="Regen Icon">
-        <p class="hover-text">Platzhaltertext für Regentropfen</p>
+        <img src="img/drop.png" alt="Wasser Icon">
+        <p class="hover-text">
+          <strong>Wasserbedarf:</strong> Wasser ist essenziell für das Wachstum. Zu wenig führt zu Stress, zu viel kann Wurzeln schädigen. Die richtige Menge sorgt dafür, dass Pflanzen gesund und kräftig bleiben.
+        </p>
       </div>
     </div>
+
     <div class="choose-plant">
       <span>choose your plant</span>
       <button class="arrow-btn" onclick="showSection('eingabe')">&#8594;</button>
     </div>
-  </main>
-</section>
+  </section>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+</body>
+</html>
 
 <!-- ---------------- Eingabe-Seite ---------------- -->
 <section id="eingabe">
@@ -89,6 +99,6 @@
   </main>
 </section>
 
-<script src="js/script.js"></script>
+<script src="./js/script.js"></script>
 </body>
 </html>

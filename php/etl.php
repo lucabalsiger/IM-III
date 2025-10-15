@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+$pdo = new PDO($dsn, $username, $password, $options);
+
 // ------------------------------------------
 // ETL-Skript für Pflanzengieß-Empfehlung
 // ------------------------------------------
