@@ -45,7 +45,6 @@ async function calculateWater(event) {
             let tagesDurchschnittUV = 0;
             let tagesDurchschnittTemp = 0;
 
-
             werte.uv.forEach(v => {
                 tagesDurchschnittUV += v;
             });
@@ -62,11 +61,8 @@ async function calculateWater(event) {
         });
 
         // Durchschnitt über alle Tage (Durchschnitt von uvValues und tempValues)
-        
         avgUV = uvValues.reduce((a, b) => a + b, 0) / uvValues.length;
         avgTemp = tempValues.reduce((a, b) => a + b, 0) / tempValues.length;
-
-
     }
 
     let wasser = 0;
@@ -76,10 +72,14 @@ async function calculateWater(event) {
 
     wasser *= zeitraum / 7;
 
-    document.getElementById('ergebnisText').innerText =
+    // ----------------- Nur dieser Teil minimal angepasst -----------------
+    document.getElementById('ergebnisUV').innerText =
         `In den letzten ${zeitraum} Tagen war der durchschnittliche UV-Index ${avgUV.toFixed(1)} ` +
-        `und die Temperatur ${avgTemp.toFixed(1)}°C. ` +
+        `und die Temperatur ${avgTemp.toFixed(1)}°C.`;
+
+    document.getElementById('ergebnisWasser').innerText =
         `Deshalb solltest du deine Pflanze ${Math.round(wasser)} ml Wasser geben.`;
+    // ----------------------------------------------------------------------
 
     showSection('ergebnis');
 }

@@ -3,97 +3,133 @@
   display: none;
   min-height: 100vh;
   background-color: rgba(76, 175, 80, 0.3);
-  position: relative;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
+  position: relative;
 }
 
-#info.active {
-  display: block;
-}
+#info.active { display: block; }
 
+/* Logo absolut über dem grünen Hintergrund */
 .logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 120px;
+  position: fixed; /* bleibt oben links, unabhängig vom Container */
+  top: 15px;
+  left: 15px;
+  width: 150px;
+  cursor: pointer;
   transition: transform 0.3s ease;
+  z-index: 1000;
+}
+.logo:hover { transform: scale(1.1); }
+
+/* Weißer Content-Container unter dem Logo, weiter unten starten */
+.content-container {
+  max-width: 900px;
+  margin: 250px auto 3rem auto; /* größerer Abstand von oben */
+  padding: 3.5rem 3rem;
+  background-color: rgba(255,255,255,0.9);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 5;
 }
 
-.logo:hover {
-  transform: scale(1.1);
-}
+.info-header { text-align: center; margin-bottom: 3rem; }
+.info-header h1 { font-size: 2.8rem; font-weight: 600; margin-bottom: 0.5rem; color: #2e2e2e; }
+.info-header p { font-size: 1.2rem; font-family: 'Lora', serif; max-width: 650px; margin: 0 auto; color:#333; }
 
+/* Symbole nebeneinander auf Desktop */
 .symbol-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 6rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
-
 .symbol-card {
   position: relative;
   text-align: center;
   cursor: pointer;
 }
 
-.symbol-card img {
-  width: 140px;
-  height: 140px;
+.symbol-img {
+  width: 130px;
+  height: auto;
   transition: transform 0.3s;
 }
+.symbol-card img[src*="sun.png"] { width: 150px; height: auto; }
+.symbol-card:hover .symbol-img { transform: scale(1.25); }
 
-.symbol-card:hover img {
-  transform: scale(1.25);
-}
-
+/* Hover-Texte auf Desktop */
 .hover-text {
   position: absolute;
   bottom: -180px;
   left: 50%;
   transform: translateX(-50%);
   width: 280px;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  font-family: 'Lora', serif;
-  font-size: 0.95rem;
-  text-align: left;
-  line-height: 1.5;
+  background: rgba(0,0,0,0.85);
+  color:#fff;
+  padding:1rem;
+  border-radius:10px;
+  opacity:0;
+  pointer-events:none;
+  font-family:'Lora', serif;
+  font-size:0.95rem;
+  line-height:1.5;
+  text-align:left;
+  transition:opacity 0.3s ease;
 }
-
-.symbol-card:hover .hover-text {
-  opacity: 1;
-}
+.symbol-card:hover .hover-text { opacity:1; }
 
 .choose-plant {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  margin-top: 2rem;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  justify-content:center;
 }
-
 .arrow-btn {
-  background-color: #6fbf73;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  padding: 0.6rem 0.9rem;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background-color:#6fbf73;
+  border:none;
+  color:#fff;
+  font-size:1.5rem;
+  padding:0.6rem 0.9rem;
+  border-radius:50%;
+  cursor:pointer;
+  transition:0.3s;
 }
+.arrow-btn:hover { background-color:#58a25b; }
 
-.arrow-btn:hover {
-  background-color: #58a25b;
+/* ---------------- Responsive Anpassungen ---------------- */
+@media screen and (max-width: 768px) {
+  .content-container { padding: 2.5rem 1.5rem; margin: 220px auto 3rem auto; }
+  .info-header h1 { font-size: 2rem; }
+  .info-header p { font-size: 1rem; max-width: 90%; }
+
+  /* Symbole untereinander */
+  .symbol-container {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .symbol-img { width: 100px; }
+  .symbol-card img[src*="sun.png"] { width: 120px; }
+
+  /* Hover-Texte immer sichtbar unter dem Symbol auf Mobile */
+  .hover-text {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 90%;
+    opacity: 1;
+    pointer-events: auto;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Logo kleiner auf Mobile */
+  .logo { width: 120px; top: 15px; left: 15px; }
 }

@@ -11,94 +11,154 @@
 <!-- Stylesheets -->
 <link rel="stylesheet" href="./css/landing.css">
 <link rel="stylesheet" href="./css/info.css">
-<link rel="stylesheet" href="./css/eingabe.css">
 <link rel="stylesheet" href="./css/ergebnis.css">
+<link rel="stylesheet" href="./css/eingabe.css">
 </head>
 <body>
 
   <!-- ---------------- Landing Page ---------------- -->
-  <section id="landing" class="active">
-    <h1>Berner Sonne</h1>
+ <section id="landing" class="active">
+  <!-- Tropfen außerhalb des Rahmens -->
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:10px; --delay:0s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:90px; --delay:0.5s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:170px; --delay:1s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:250px; --delay:1.2s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:330px; --delay:0.8s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:410px; --delay:1.1s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:490px; --delay:0.2s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:570px; --delay:0.7s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:650px; --delay:1.4s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:730px; --delay:0.9s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:810px; --delay:1.6s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:890px; --delay:1.3s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:970px; --delay:0.4s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1050px; --delay:0.6s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1130px; --delay:1.5s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1210px; --delay:1.8s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1290px; --delay:0.3s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1370px; --delay:1.1s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1450px; --delay:0.7s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1530px; --delay:1.2s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1610px; --delay:1.4s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1690px; --delay:0.9s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1770px; --delay:1.7s;">
+  <img src="img/drop.png" alt="Regentropfen" class="rain-drop" style="--left:1850px; --delay:0.6s;">
+
+  <div class="content-container">
     <img src="img/logo.png" alt="Logo Berner Sonne" class="landing-logo">
-    <p>Finde heraus, wie viel Wasser deine Pflanzen brauchen!</p>
-    <button class="btn" onclick="showSection('info')">Los geht's</button>
-  </section>
+    <p>Wieviel Durst haben die Berner Pflanzen heute?</p>
+    <button class="btn" onclick="showSection('info')">Find out</button>
+  </div>
+</section>
 
   <!-- ---------------- Info-Seite ---------------- -->
   <section id="info">
-    <img src="img/logo.png" alt="Logo" class="logo">
-    <div class="symbol-container">
-      <div class="symbol-card">
-        <img src="img/sun.png" alt="Sonne Icon">
-        <p class="hover-text">
-          <strong>UV-Index:</strong> Der UV-Index zeigt an, wie stark die ultraviolette Strahlung der Sonne auf der Erde ankommt. Je höher der Wert, desto intensiver die Strahlung und desto mehr Wasser benötigen die Pflanzen.
-        </p>
-      </div>
-      <div class="symbol-card">
-        <img src="img/plant.png" alt="Pflanze Icon">
-        <p class="hover-text">
-          <strong>Pflanzenpflege:</strong> Ob drinnen oder draußen, jede Pflanze hat andere Bedürfnisse. Auch die Topfgröße beeinflusst Wachstum und Gesundheit – grössere Töpfe bieten mehr Wurzelraum und Stabilität.
-        </p>
-      </div>
-      <div class="symbol-card">
-        <img src="img/drop.png" alt="Wasser Icon">
-        <p class="hover-text">
-          <strong>Wasserbedarf:</strong> Wasser ist essenziell für das Wachstum. Zu wenig führt zu Stress, zu viel kann Wurzeln schädigen. Die richtige Menge sorgt dafür, dass Pflanzen gesund und kräftig bleiben.
-        </p>
-      </div>
-    </div>
+    <img src="img/logo.png" alt="Logo" class="logo" onclick="showSection('landing')">
 
-    <div class="choose-plant">
-      <span>choose your plant</span>
-      <button class="arrow-btn" onclick="showSection('eingabe')">&#8594;</button>
+    <div class="content-container">
+      <div class="info-header">
+        <h1>Pflanzenguide</h1>
+        <p>Erkunde die einzelnen Symbole und erfahre alles über die Bedürfnisse deiner Grünpflanze.</p>
+      </div>
+
+      <div class="symbol-container">
+        <div class="symbol-card">
+          <img src="img/sun.png" alt="Sonne Icon" class="symbol-img">
+          <p class="hover-text">
+            <strong>UV-Index:</strong> Der UV-Index zeigt an, wie stark die ultraviolette Strahlung der Sonne auf der Erde ankommt. Je höher der Wert, desto intensiver die Strahlung und desto mehr Wasser benötigen die Pflanzen.
+          </p>
+        </div>
+        <div class="symbol-card">
+          <img src="img/plant.png" alt="Pflanze Icon" class="symbol-img">
+          <p class="hover-text">
+            <strong>Pflanzenpflege:</strong> Ob drinnen oder draußen, jede Pflanze hat andere Bedürfnisse. Auch die Topfgröße beeinflusst Wachstum und Gesundheit – grössere Töpfe bieten mehr Wurzelraum und Stabilität.
+          </p>
+        </div>
+        <div class="symbol-card">
+          <img src="img/drop.png" alt="Wasser Icon" class="symbol-img">
+          <p class="hover-text">
+            <strong>Wasserbedarf:</strong> Wasser ist essenziell für das Wachstum. Zu wenig führt zu Stress, zu viel kann Wurzeln schädigen. Die richtige Menge sorgt dafür, dass Pflanzen gesund und kräftig bleiben.
+          </p>
+        </div>
+      </div>
+
+      <div class="choose-plant">
+        <span>choose your plant</span>
+        <button class="arrow-btn" onclick="showSection('eingabe')">&#8594;</button>
+      </div>
     </div>
   </section>
 
-  <script>
-    function showSection(id) {
-      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-    }
-  </script>
-</body>
-</html>
+  <!-- ---------------- Eingabe-Seite ---------------- -->
+  <section id="eingabe">
+    <header class="eingabe-header">
+      <h1>Pflanzenpflege berechnen</h1>
+    </header>
 
-<!-- ---------------- Eingabe-Seite ---------------- -->
-<section id="eingabe">
-  <header class="eingabe-header">
-    <h1>Pflanzenpflege berechnen</h1>
-  </header>
-  <main class="eingabe-main">
-    <form id="pflegeForm" onsubmit="calculateWater(event)">
-      <label for="topf">Topfgröße auswählen:</label>
-      <select id="topf" name="topf">
-        <option value="small">Klein</option>
-        <option value="medium">Mittel</option>
-        <option value="large">Groß</option>
-      </select>
+    <main class="eingabe-main">
+      <form id="pflegeForm" onsubmit="calculateWater(event)">
+        <div class="step">
+          <h2>Step 1</h2>
+          <label>Topfgrösse wählen:</label>
+          <div class="pot-container">
+            <img src="img/plant-size.png" alt="kleiner Topf" class="pot-option small" data-value="small">
+            <img src="img/plant-size.png" alt="mittlerer Topf" class="pot-option medium" data-value="medium">
+            <img src="img/plant-size.png" alt="großer Topf" class="pot-option large" data-value="large">
+          </div>
+          <input type="hidden" id="topf" name="topf" value="medium">
+        </div>
 
-      <label for="zeitraum">Zeitraum auswählen:</label>
-      <input type="number" id="zeitraum" name="zeitraum" min="1" max="30" value="7"> Tage
+       <div class="step">
+        <h2>Step 2</h2>
+          <label for="zeitraum">Vor wie vielen Tagen hast du deine Pflanze das letzte Mal gegossen?</label>
+          <input type="number" id="zeitraum" name="zeitraum" min="1" max="30" value="7"> Tage
+        </div>
 
-      <button type="submit" class="btn">Berechnen</button>
-    </form>
-  </main>
-</section>
 
-<!-- ---------------- Ergebnis-Seite ---------------- -->
+        <button type="submit" class="btn">Berechnen</button>
+      </form>
+    </main>
+  </section>
+
+ <!-- ---------------- Ergebnis-Seite ---------------- -->
 <section id="ergebnis">
   <header class="ergebnis-header">
     <h1>Dein Pflanzenbewässerungsergebnis</h1>
   </header>
-  <main class="ergebnis-main">
-    <p id="ergebnisText">
-      In den letzten Tagen war der UV-Index X und die Temperatur Y°C.  
-      Deshalb solltest du deine Pflanze Z ml Wasser geben.
-    </p>
-    <button class="btn" onclick="showSection('landing')">Noch mal</button>
-  </main>
+
+  <div class="content-container">
+    <main class="ergebnis-main">
+      <p id="ergebnisUV">
+        In den letzten Tagen war der UV-Index X und die Temperatur Y°C.
+      </p>
+
+      <img src="img/sun.png" alt="Sonne Icon" class="ergebnis-symbol">
+
+      <p id="ergebnisWasser">
+        Deshalb solltest du deiner Pflanze Z ml Wasser geben.
+      </p>
+
+      <img src="img/drop.png" alt="Wassertropfen Icon" class="ergebnis-symbol">
+
+      <button class="btn" onclick="showSection('landing')">Nochmal</button>
+    </main>
+  </div>
 </section>
 
 <script src="./js/script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const potOptions = document.querySelectorAll(".pot-option");
+    const hiddenInput = document.getElementById("topf");
+    potOptions.forEach(pot => {
+      pot.addEventListener("click", () => {
+        potOptions.forEach(p => p.classList.remove("selected"));
+        pot.classList.add("selected");
+        hiddenInput.value = pot.dataset.value;
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
