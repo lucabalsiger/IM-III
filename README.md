@@ -3,6 +3,7 @@ Kurzbeschreibung
 Berner Sonne ist ein kleines datenjournalistisches Webprojekt, das den täglichen Wasserbedarf von Pflanzen einschätzt. Dafür werden aktuelle UV- und Temperaturdaten über eine Wetter-API geholt, in einer Datenbank gespeichert und mit PHP verarbeitet. Nutzer:innen geben ihre Topfgröße und die Tage seit dem letzten Gießen ein – daraus berechnet das Tool eine grobe Bewässerungsempfehlung in Millilitern.
 
 ⸻
+
 Learnings
 	•	Wie man mit PHP Daten automatisiert aus einer API holt und speichert (ETL-Prozess).
 	•	Aufbau einer eigenen Datenbank und Anbindung ans Frontend.
